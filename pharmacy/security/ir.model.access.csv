@@ -1,0 +1,14 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_pharmacy_pharmacy,access_pharmacy_pharmacy,model_pharmacy_pharmacy,,1,1,1,1
+
+access_branch_branch,access_branch_branch,model_branch_branch,,1,1,1,1
+
+access_patient_patient,access_patient_patient,model_patient_patient,,1,1,1,1
+
+access_medicine_medicine,access_medicine_medicine,model_medicine_medicine,,1,1,1,1
+
+access_branch_staff,access_branch_staff,model_branch_staff,,1,1,1,1
+
+
+

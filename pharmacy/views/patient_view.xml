@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View-->
+        <record id="view_patient_patient_form" model="ir.ui.view">
+            <field name="name">patient_patient.form</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient Details">
+                    <sheet>
+                          <field name="image" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="date_of_birth"/>
+                            </group>
+                            <group>
+                                <field name="gender" required="1"/>
+                                <field name="phone"/>
+                                <field name="branch_ids"/>
+                                <field name="location"/>
+                                <field name="medicine_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Note">
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </page>
+                            <page string="Contact">
+                                <group>
+                                    <group>
+                                        <field name="phone"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!--Tree Views-->
+        <record id="view_patient_patient_tree" model="ir.ui.view">
+            <field name="name">patient.patient.tree</field>
+            <field name="model">patient.patient</field>
+            <field name="arch" type="xml">
+                <tree string="Patient Details">
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="date_of_birth"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record id="action_patient_patient" model="ir.actions.act_window">
+            <field name="name">Patient Details</field>
+            <field name="res_model">patient.patient</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--Menus-->
+        <menuitem id="pharmacy_menu" name="Pharmacy" sequence="1"/>
+        <menuitem id="patient_menu" name="Patient" sequence="2" action="action_patient_patient" parent="pharmacy_menu"/>
+    </data>
+</odoo>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View-->
+        <record id="view_branch_branch_form" model="ir.ui.view">
+            <field name="name">branch.branch.form</field>
+            <field name="model">branch.branch</field>
+            <field name="arch" type="xml">
+                <form string="Branch">
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="location"/>
+                                <field name="available_staff" widget="boolean_toggle"/>
+                                <field name="staff_ids" attrs="{'invisible': [('available_staff','=',False)] }"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Staff">
+                                <group>
+                                    <field name="staff_id">
+                                        <tree editable="bottom">
+                                            <field name="branch_id"/>
+                                            <field name="staff_ids"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                             </page>
+                            <page string="Medicine">
+                                <group>
+                                <field name="medicine" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!--Tree Views-->
+        <record id="view_branch_branch_tree" model="ir.ui.view">
+            <field name="name">branch.branch.tree</field>
+            <field name="model">branch.branch</field>
+            <field name="arch" type="xml">
+                <tree string="Branch">
+                    <field name="name"/>
+                    <field name="location"/>
+                </tree>
+            </field>
+        </record>
+
+<!--        kanban view-->
+        <record id="view_branch_branch_kanban" model="ir.ui.view">
+            <field name="name">branch_branch.kanban</field>
+            <field name="model">branch.branch</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" string="Branch">
+                    <field name="image"/>
+                    <field name="id"/>
+                     <templates>
+                         <t t-name="kanban-box">
+                              <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                      <div class="o_kanban_image">
+                                         <img class="o_kanban_image_pic" alt="Avatar" t-att-src="kanban_image('branch.branch', 'image',record.id.raw_value)"/>
+                                      </div>
+                                  <div>
+                                    <strong class="o_kanban_record_title">
+                                      <strong>  Name : <span><field name="name"/></span></strong>
+                                    </strong>
+
+                                      <strong class="o_kanban_record_subtitle">
+                                          Location : <span><field name="location"/></span>
+                                      </strong>
+                                  </div>
+                              </div>
+                         </t>
+                     </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+        <!-- Action -->
+        <record id="action_branch_branch" model="ir.actions.act_window">
+            <field name="name">Branch</field>
+            <field name="res_model">branch.branch</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <!--Menus-->
+        <menuitem id="pharmacy_menu" name="Pharmacy" sequence="1"/>
+        <menuitem id="branch_menu" name="Branch" sequence="2" action="action_branch_branch" parent="pharmacy_menu"/>
+    </data>
+</odoo>
