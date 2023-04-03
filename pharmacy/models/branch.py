@@ -11,11 +11,19 @@ class BranchInfo(models.Model):
     staff_ids = fields.Many2one('pharmacy.pharmacy', string='Staff', domain="[('branch_ids', '=', name)]")
     staff_id = fields.One2many('branch.staff', 'branch_id', string='staff')
     color = fields.Integer(string='Color')
-    medicine = fields.Many2many('medicine.medicine',string='Medicine')
+    medicine = fields.Many2many('medicine.medicine', string='Medicine')
+    patient_id = fields.One2many('patient.details', 'branch_id', string='Patient')
 
 
 class BranchStaff(models.Model):
     _name = "branch.staff"
 
     staff_ids = fields.Many2one('pharmacy.pharmacy', string='Staff', domain="[('branch_ids', '=', branch_id)]")
+    branch_id = fields.Many2one('branch.branch', string='Branch')
+
+
+class PatientDetails(models.Model):
+    _name = "patient.details"
+
+    patient_ids = fields.Many2one('patient.patient', string='Patient', domain="[('branch_ids', '=', branch_id)]")
     branch_id = fields.Many2one('branch.branch', string='Branch')

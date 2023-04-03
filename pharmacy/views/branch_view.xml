@@ -34,6 +34,16 @@
                                 <field name="medicine" widget="many2many_tags"/>
                                 </group>
                             </page>
+                            <page string="Patient">
+                                <group>
+                                    <field name="patient_id">
+                                    <tree editable="bottom">
+                                         <field name="branch_id"/>
+                                         <field name="patient_ids"/>
+                                    </tree>
+                                    </field>
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
