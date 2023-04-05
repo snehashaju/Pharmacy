@@ -16,6 +16,8 @@
                                 <field name="location"/>
                                 <field name="available_staff" widget="boolean_toggle"/>
                                 <field name="staff_ids" attrs="{'invisible': [('available_staff','=',False)] }"/>
+                                <field name="total"/>
+
                             </group>
                         </group>
                         <notebook>
@@ -36,10 +38,11 @@
                             </page>
                             <page string="Patient">
                                 <group>
-                                    <field name="patient_id">
+                                    <field name="patient_ids">
                                     <tree editable="bottom">
                                          <field name="branch_id"/>
                                          <field name="patient_ids"/>
+                                        <field name="payment"/>
                                     </tree>
                                     </field>
                                 </group>

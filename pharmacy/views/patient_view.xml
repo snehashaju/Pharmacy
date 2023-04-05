@@ -12,6 +12,8 @@
                           <field name="image" widget="image" class="oe_avatar"/>
                         <group>
                             <group>
+                                <field name="first_name"/>
+                                <field name="last_name"/>
                                 <field name="name"/>
                                 <field name="age"/>
                                 <field name="date_of_birth"/>

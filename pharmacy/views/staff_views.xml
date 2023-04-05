@@ -18,6 +18,7 @@
                                 <field name="name"/>
                                 <field name="age"/>
                                 <field name="date_of_birth"/>
+                                <field name="year"/>
                             </group>
                             <group>
                                 <field name="gender" required="1"/>
