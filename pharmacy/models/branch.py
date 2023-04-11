@@ -1,8 +1,20 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 
 
 class BranchInfo(models.Model):
     _name = "branch.branch"
+
+    @api.model
+    def _get_default_user(self):
+        return self.env.context.get('user_id', self.env.user.id)
+
+    @api.model
+    def _get_default_user_email(self):
+        return self.env.user.email
+
+    # @api.model
+    # def _get_default_user_language(self):
+    #     return self.env.user.Language
 
     name = fields.Char(string="Pharmacy Name", help="Enter the name")
     image = fields.Image(string="Image")
@@ -13,6 +25,9 @@ class BranchInfo(models.Model):
     color = fields.Integer(string='Color')
     medicine = fields.Many2many('medicine.medicine', string='Medicine')
     patient_ids = fields.One2many('patient.details', 'branch_id', string='Patient')
+    user_id = fields.Many2one('res.users', string="User", default=_get_default_user)
+    user_email = fields.Char('Email', default=_get_default_user_email)
+    # user_language = fields.Selection('Language', default=_get_default_user_language)
     total = fields.Float('Total', compute='compute_fees_total')
 
     @api.depends('patient_ids.payment')

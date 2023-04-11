@@ -16,6 +16,7 @@
                                 <field name="last_name"/>
                                 <field name="name"/>
                                 <field name="age"/>
+                                <field name="patient_code"/>
                                 <field name="date_of_birth"/>
                             </group>
                             <group>

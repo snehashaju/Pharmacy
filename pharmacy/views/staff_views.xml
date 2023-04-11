@@ -18,10 +18,10 @@
                                 <field name="name"/>
                                 <field name="age"/>
                                 <field name="date_of_birth"/>
-                                <field name="year"/>
+                                <field name="staff_category"/>
                             </group>
                             <group>
-                                <field name="gender" required="1"/>
+                                <field name="gender"/>
                                 <field name="education" required="1"/>
                                 <field name="phone"/>
                                 <field name="branch_ids"/>

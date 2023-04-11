@@ -16,6 +16,9 @@
                                 <field name="location"/>
                                 <field name="available_staff" widget="boolean_toggle"/>
                                 <field name="staff_ids" attrs="{'invisible': [('available_staff','=',False)] }"/>
+                                <field name="user_id"/>
+                                <field name="user_email"/>
+<!--                                <field name="user_language"/>-->
                                 <field name="total"/>
 
                             </group>

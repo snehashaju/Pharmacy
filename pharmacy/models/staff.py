@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields,api
 
 
 class StaffInfo(models.Model):
@@ -15,17 +15,35 @@ class StaffInfo(models.Model):
     status = fields.Selection([('temporary', 'Temporary'),
                                ('permanent', 'Permanent')],
                               'Status', default='temporary')
+    staff_category = fields.Selection([('temporary', 'Temporary'),
+                               ('permanent', 'Permanent')],
+                              'staff_category')
     phone = fields.Char(string="Phone")
     note = fields.Text(string='Note')
     branch_ids = fields.Many2one('branch.branch', string='Branch')
     location = fields.Char(related='branch_ids.location', string='Location')
     color = fields.Integer(string='color')
 
-    #
-    # @api.onchange('date_of_birth', 'year')
-    # def get_age(self):
-    #     if self.year and self.date_of_birth:
-    #         self.age = self.year - self.date_of_birth
+    def set_employee_status(self, vals):
+        if vals.get('staff_category') == 'temporary':
+            vals['status'] = 'temporary'
+        elif vals.get('staff_category') == 'permanent':
+            vals['status'] = 'permanent'
+        return vals
+
+    def write(self, vals):
+        vals = self.set_employee_status(vals)
+        res = super(StaffInfo, self).write(vals)
+        return res
+
+    @api.model
+    def create(self, vals):
+        vals['gender'] = 'female'
+        return super(StaffInfo, self).create(vals)
+
+
+
+
 
 
 
