@@ -8,12 +8,24 @@
             <field name="model">medicine.medicine</field>
             <field name="arch" type="xml">
                 <form string="Medicine">
+                    <header>
+                        <button name="%(pharmacy.action_medicine_exp_wizard)d"  type="action"  string="Medicine"/>
+                        <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
                     <sheet>
                         <field name="image" widget="image" class="oe_avatar"/>
                         <group>
                             <group>
                                 <field name="name"/>
                                 <field name="delivery_date"/>
+                                <button name="action_test" string="Object Button" type="object"
+                                help="A message will be printed in thr log"
+                                confirm="Are you sure to execute python code?"
+                                class="oe_highlight"/>
+                                 <button name="action_website" string="Button" type="object"
+                                help="A message will be printed in thr log"
+                                confirm="Are you sure to execute python code?"
+                                class="oe_highlight"/>
                             </group>
                         </group>
                     </sheet>
@@ -45,15 +57,26 @@
             </field>
         </record>
 
+         <!--Graph view-->
+        <record id="medicine_medicine_view_graph" model="ir.ui.view">
+            <field name="name">medicine.medicine.graph</field>
+            <field name="model">medicine.medicine</field>
+            <field name="arch" type="xml">
+                <graph string="Medicine Analysis" sample="1">
+                    <field name="name"/>
+                    <field name="delivery_date" interval="month"/>
+                </graph>
+            </field>
+        </record>
+
         <!-- Action -->
         <record id="action_medicine_medicine" model="ir.actions.act_window">
             <field name="name">Medicine</field>
             <field name="res_model">medicine.medicine</field>
-            <field name="view_mode">tree,form,calendar</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
         </record>
 
         <!--Menus-->
-        <menuitem id="pharmacy_menu" name="Pharmacy" sequence="1"/>
         <menuitem id="Medicine_menu" name="Medicine" sequence="2" action="action_medicine_medicine" parent="pharmacy_menu"/>
     </data>
 </odoo>

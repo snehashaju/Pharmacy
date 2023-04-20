@@ -15,16 +15,15 @@
                                 <field name="first_name"/>
                                 <field name="last_name"/>
                                 <field name="name"/>
-                                <field name="age"/>
                                 <field name="patient_code"/>
                                 <field name="date_of_birth"/>
+                                <field name="age"/>
                             </group>
                             <group>
                                 <field name="gender" required="1"/>
                                 <field name="phone"/>
                                 <field name="branch_ids"/>
                                 <field name="location"/>
-                                <field name="medicine_ids" widget="many2many_tags"/>
                             </group>
                         </group>
                         <notebook>
@@ -40,12 +39,23 @@
                                     </group>
                                 </group>
                             </page>
+                            <page string="Medicine">
+                                <group>
+                                    <field name="medicine_ids">
+                                        <tree editable="bottom">
+                                            <field name="patient_id"/>
+                                            <field name="age"/>
+                                            <field name="gender"/>
+                                            <field name="medicine_ids" widget="many2many_tags"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
-
 
         <!--Tree Views-->
         <record id="view_patient_patient_tree" model="ir.ui.view">
@@ -60,7 +70,6 @@
             </field>
         </record>
 
-
         <!-- Action -->
         <record id="action_patient_patient" model="ir.actions.act_window">
             <field name="name">Patient Details</field>
@@ -69,7 +78,6 @@
         </record>
 
         <!--Menus-->
-        <menuitem id="pharmacy_menu" name="Pharmacy" sequence="1"/>
         <menuitem id="patient_menu" name="Patient" sequence="2" action="action_patient_patient" parent="pharmacy_menu"/>
     </data>
 </odoo>

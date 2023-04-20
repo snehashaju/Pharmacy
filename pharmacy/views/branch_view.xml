@@ -9,6 +9,16 @@
             <field name="arch" type="xml">
                 <form string="Branch">
                     <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button name="action_pharmacy_pharmacy" type="object" class="oe_start_button"
+                                    icon="fa-calendar">
+                                <div classs="o_start_info">
+                                    <field name="staff_ids" class="o_start_value"/>
+                                    <span class="o_start_text">Meeting</span>
+
+                                </div>
+                            </button>
+                        </div>
                         <field name="image" widget="image" class="oe_avatar"/>
                         <group>
                             <group>
@@ -110,13 +120,23 @@
             </field>
         </record>
 
-
+        <!--Graph view-->
+        <record id="branch_branch_view_graph" model="ir.ui.view">
+            <field name="name">branch.branch.graph</field>
+            <field name="model">branch.branch</field>
+            <field name="arch" type="xml">
+                <graph string="Branch Analysis" sample="1">
+                    <field name="staff_ids"/>
+                    <field name="name"/>
+                </graph>
+            </field>
+        </record>
 
         <!-- Action -->
         <record id="action_branch_branch" model="ir.actions.act_window">
             <field name="name">Branch</field>
             <field name="res_model">branch.branch</field>
-            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
         </record>
 
         <!--Menus-->

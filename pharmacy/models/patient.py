@@ -19,7 +19,8 @@ class PatientInfo(models.Model):
     note = fields.Text(string='Note')
     branch_ids = fields.Many2one('branch.branch', string='Branch')
     location = fields.Char(related='branch_ids.location', string='Location')
-    medicine_ids = fields.Many2many('medicine.medicine', string='Medicine')
+    medicine_ids = fields.One2many('patient.medicine', 'patient_id', string='Medicine')
+
 
     @api.onchange('first_name', 'last_name')
     def onchange_get_name(self):
@@ -28,19 +29,20 @@ class PatientInfo(models.Model):
 
     @api.onchange('date_of_birth')
     def _onchange_dob(self):
-        current_date = date.today()
-        current_year = current_date.year
-        date_of_birth_year = self.date_of_birth.year
+        if self.date_of_birth:
+            current_date = date.today()
+            current_year = current_date.year
+            date_of_birth_year = self.date_of_birth.year
         # if self.date_of_birth:
-        self.age = current_year - date_of_birth_year
+            self.age = current_year - date_of_birth_year
 
     _sql_constraints = [
         ('patient_code_uniq', 'unique (patient_code)', 'The Patient Code must be unique !')
     ]
 
-    _sql_constraints = [
-        ('phone_uniq', 'unique (phone)', 'The Phone Number must be unique !')
-    ]
+    # _sql_constraints = [
+    #     ('phone_uniq', 'unique (phone)', 'The Phone Number must be unique !')
+    # ]
 
     @api.constrains('patient_code')
     def _constraints_patient_code(self):
@@ -62,6 +64,19 @@ class PatientInfo(models.Model):
         return super(PatientInfo, self).copy(default=default)
 
 
+class PatientMedicine(models.Model):
+    _name = 'patient.medicine'
 
+    patient_id = fields.Many2one('patient.patient', string='Patient')
+    medicine_ids = fields.Many2many('medicine.medicine', string='Medicine')
+    age = fields.Integer(string='Age', related='patient_id.age')
+    gender = fields.Selection([
+        ('female', 'Female'),
+        ('male', 'Male')],
+        'Gender')
 
-
+    @api.onchange('patient_id')
+    def onchange_gender(self):
+        if self.patient_id:
+            if self.patient_id.gender:
+                self.gender = self.patient_id.gender

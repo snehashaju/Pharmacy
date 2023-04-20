@@ -38,6 +38,16 @@ class BranchInfo(models.Model):
                 fees_total += patient.payment
             rec.total = fees_total
 
+    def action_pharmacy_pharmacy(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Staff',
+            'view_mode': 'list,form',
+            'res_model': 'pharmacy.pharmacy',
+            'context': "{}",
+            'target': "current"
+        }
+
 
 class BranchStaff(models.Model):
     _name = "branch.staff"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="medicine_data_Acetaminophen" model="medicine.medicine">
+            <field name="name">Acetaminophen</field>
+        </record>
+        <record id="medicine_data_Adderall" model="medicine.medicine">
+            <field name="name">Adderall</field>
+        </record>
+        <record id="medicine_data_Amitriptyline" model="medicine.medicine">
+            <field name="name">Amitriptyline</field>
+        </record>
+        <record id="medicine_data_Amlodipine" model="medicine.medicine">
+            <field name="name">Amlodipine</field>
+        </record>
+    </data>
+</odoo>
