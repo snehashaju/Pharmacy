@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+        <record id="email_template_patient_invite" model="mail.template">
+            <field name="name">Invite: Patient Reminder</field>
+            <field name="model_id" ref="pharmacy.model_patient_patient"/>
+            <field name="email_from">{{ user.email_formatted }}</field>
+            <field name="email_to">{{ (object.email and '"%s" &lt;%s&gt;' % (object.name, object.email))  }}</field>
+            <field name="subject">Patient Invite {{ object.name or 'n/a' }})</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear
+                        <t t-if="object.name">
+                            <t t-out="object.name or ''"/>
+                        </t>
+                        <br /><br />
+                        <t t-if="object.date_of_birth">
+                             You have appointment on <strong t-out="object.date_of_birth or ''"></strong>
+                        </t>
+                    </p>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

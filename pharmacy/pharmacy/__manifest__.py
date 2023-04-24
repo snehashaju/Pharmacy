@@ -7,6 +7,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/mail_tempate.xml',
         'wizard/medicine_exp_view.xml',
         'data/medicine_data.xml',
         'views/branch_view.xml',

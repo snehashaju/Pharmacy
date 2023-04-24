@@ -17,3 +17,8 @@ access_patient_details,access_patient_details,model_patient_details,,1,1,1,1
 ,,,,,,,
 access_patient_medicine,access_patient_medicine,model_patient_medicine,,1,1,1,1
 access_medicine_wizard,access_medicine_wizard,model_medicine_wizard,,1,1,1,1
+access_medicine_exp,access_medicine_exp,model_medicine_exp,,1,1,1,1
+
+
+
+

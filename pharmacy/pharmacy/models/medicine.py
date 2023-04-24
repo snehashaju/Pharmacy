@@ -19,9 +19,13 @@ class BranchInfo(models.Model):
     def action_website(self):
         return{
                 'target': 'new',
-                'url': 'https://www.odoo.com/',
+                'url': 'https://www.odoo.com/app/point-of-sale-shop',
                 'type': 'ir.actions.act_url'
         }
+
+    def action_done(self):
+        for rec in self:
+            rec.status = 'available'
 
     name = fields.Char(string="Medicine Name", help="Enter the name")
     image = fields.Image(string="Image")
@@ -31,6 +35,14 @@ class BranchInfo(models.Model):
         ('unavailable', 'Unavailable')],
         'Status', default='available')
     user_id = fields.Many2one('res.users', string="User", default=_get_default_user)
+    starting_date = fields.Date(string="Start Date")
+    exp_date = fields.Date(string="EXP Date")
+
+
+
+
+
+
 
 
 

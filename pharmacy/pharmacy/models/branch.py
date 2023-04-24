@@ -29,6 +29,9 @@ class BranchInfo(models.Model):
     user_email = fields.Char('Email', default=_get_default_user_email)
     # user_language = fields.Selection('Language', default=_get_default_user_language)
     total = fields.Float('Total', compute='compute_fees_total')
+    starting_date = fields.Date(string="Start Date")
+    exp_date = fields.Date(string="EXP Date")
+    branch_ids = fields.One2many('medicine.exp','branch_id',string='Branch')
 
     @api.depends('patient_ids.payment')
     def compute_fees_total(self):

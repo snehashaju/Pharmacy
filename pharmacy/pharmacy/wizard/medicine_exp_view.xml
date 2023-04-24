@@ -9,7 +9,14 @@
                     <group>
                         <field name="starting_date"/>
                         <field name="exp_date"/>
-                    </group>
+                     </group>
+                    <field name="branch_ids">
+                        <tree editable="bottom">
+                            <field name="branch_id"/>
+                            <field name="medicine_id"/>
+                        </tree>
+                    </field>
+
                     <footer>
                         <button string="Save" name="create_medicine" type="object" class="oe_highlight" data-hotkey="q"/>
                         <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
@@ -26,7 +33,6 @@
             <field name="view_id" ref="view_medicine_exp_form"/>
             <field name="target">new</field>
         </record>
-
 
 </odoo>
 

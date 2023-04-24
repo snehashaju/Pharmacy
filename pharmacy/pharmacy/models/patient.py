@@ -20,7 +20,11 @@ class PatientInfo(models.Model):
     branch_ids = fields.Many2one('branch.branch', string='Branch')
     location = fields.Char(related='branch_ids.location', string='Location')
     medicine_ids = fields.One2many('patient.medicine', 'patient_id', string='Medicine')
+    email = fields.Char(string='Email')
 
+    def send_patient_mail(self):
+        template = self.env.ref('pharmacy.email_template_patient_invite', raise_if_not_found=False)
+        template.sudo().send_mail(self.id, force_send=True)
 
     @api.onchange('first_name', 'last_name')
     def onchange_get_name(self):
@@ -80,3 +84,6 @@ class PatientMedicine(models.Model):
         if self.patient_id:
             if self.patient_id.gender:
                 self.gender = self.patient_id.gender
+
+
+
